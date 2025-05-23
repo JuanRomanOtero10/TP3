@@ -1,4 +1,4 @@
-//Otero-Sznajdleder-Bairros
+//Otero-Sznajdleder-Bairros  Grupo 1
 TaskHandle_t Tarea1;
 TaskHandle_t Tarea2;
 #include <U8g2lib.h>
