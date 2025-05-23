@@ -55,8 +55,8 @@ void setup() {
   Serial.begin(115200);
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
-  pinMode(BOTON1, INPUT_PULLUP);
-  pinMode(BOTON2, INPUT_PULLUP);
+  pinMode(BOTON1, INPUT);
+  pinMode(BOTON2, INPUT);
   Serial.println(F("DHTxx test!"));
   u8g2.begin();
   dht.begin();
