@@ -23,7 +23,6 @@ void printBMP_OLED2(void) ;
 #define ESPERA1 2
 #define ESPERA2 3
 #define ESPERA3 21
-#define ESPERA4 32
 #define AUMENTAR 4
 #define RESTAR 5
 int estado = RST;
@@ -35,6 +34,8 @@ DHT dht(DHTPIN, DHTTYPE);
 float temp;
 unsigned long millis_valor;
 unsigned long millis_actual;
+unsigned long millis_valor2;
+unsigned long millis_actual2;
 int valorU = 26;
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);
@@ -42,8 +43,8 @@ void CodigoTarea1(void *pvParameters);
 void CodigoTarea2(void *pvParameters);
 bool alertaEnviada = false;
 
-const char* ssid = "MECA-IoT";
-const char* password = "IoT$2025";
+const char* ssid = "ORT-IoT";
+const char* password = "NuevaIOT$25";
 const char* ntpServer = "pool.ntp.org";
 
 // LED pins
@@ -141,8 +142,8 @@ void CodigoTarea2( void * pvParameters ) {
   Serial.print("Task2 running on core ");
   Serial.println(xPortGetCoreID());
   for (;;) { //si o si tiene que ir un while o un for para que nunca salga de la tarea
-    millis_actual = millis();
-    if (millis_actual - millis_valor >= 2000) {
+    millis_actual2 = millis();
+    if (millis_actual2 - millis_valor2 >= 2000) {
       temp = dht.readTemperature();
       if (isnan(temp)) {
         Serial.println(F("Failed to read from DHT sensor!"));
@@ -152,7 +153,7 @@ void CodigoTarea2( void * pvParameters ) {
     switch (estado) {
       case RST:
         {
-          millis_valor = millis();
+          millis_valor2 = millis();
           estado = P1;
         }
         break;
@@ -160,7 +161,7 @@ void CodigoTarea2( void * pvParameters ) {
         {
           printBMP_OLED();
           if (digitalRead(BOTON1) == LOW) {
-            millis_valor = millis();
+            millis_valor2 = millis();
             estado = ESPERA1;
           }
         }
@@ -170,8 +171,8 @@ void CodigoTarea2( void * pvParameters ) {
           if (digitalRead(BOTON1) == HIGH && digitalRead(BOTON2) == LOW) {
             estado = ESPERA3;
           }
-          if (millis_actual - millis_valor >= 5000) {
-            millis_valor = millis();
+          if (millis_actual2 - millis_valor2 >= 5000) {
+            millis_valor2 = millis();
             estado = P1;
           }
 
@@ -182,7 +183,7 @@ void CodigoTarea2( void * pvParameters ) {
           if (digitalRead(BOTON2) == HIGH && digitalRead(BOTON1) == LOW ) {
             estado = P2;
           }
-          if (millis_actual - millis_valor >= 5000) {
+          if (millis_actual2 - millis_valor2 >= 5000) {
             estado = P1;
           }
 
@@ -251,7 +252,7 @@ void loop() {
 
 void printBMP_OLED(void) {
   char stringU[5];
-  char stringtemp[5];
+  char stringtemp[6];
   u8g2.clearBuffer();          // clear the internal memory
   u8g2.setFont(u8g2_font_t0_11b_tr); // choose a suitable font
   sprintf (stringtemp, "%.2f" , temp); ///convierto el valor float a string
