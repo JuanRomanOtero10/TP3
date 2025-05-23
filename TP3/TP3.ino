@@ -115,7 +115,7 @@ void CodigoTarea1(void *pvParameters) {
         Serial.println("Error al leer del sensor DHT");
         continue;  // sigo al próximo ciclo sin hacer nada más
       }
-
+    }
       Serial.print("Temperatura actual: ");
       Serial.println(temp);
 
@@ -134,7 +134,7 @@ void CodigoTarea1(void *pvParameters) {
     }
 
   }
-}
+
 
 
 
@@ -294,4 +294,4 @@ void handleNewMessages(int numNewMessages) {
 
     }
   }
-}
+}                                                                                      
