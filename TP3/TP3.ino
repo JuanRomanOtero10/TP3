@@ -289,13 +289,9 @@ void handleNewMessages(int numNewMessages) {
       continue;
     }
     if (text != "") {
-      if (temp > valorU ) {
         String mensaje = "Temperatura: " + String(temp) + " °C";
         bot.sendMessage(CHAT_ID, mensaje, "");
-      }
-      if (temp <= valorU ) {
-        bot.sendMessage(CHAT_ID, "Temperatura: " + String(temp) + " °C", "");
-      }
+
     }
   }
 }
