@@ -43,8 +43,8 @@ void CodigoTarea1(void *pvParameters);
 void CodigoTarea2(void *pvParameters);
 bool alertaEnviada = false;
 
-const char* ssid = "ORT-IoT";
-const char* password = "NuevaIOT$25";
+const char* ssid = "MECA-IoT";
+const char* password = "IoT$2025";
 const char* ntpServer = "pool.ntp.org";
 
 // LED pins
